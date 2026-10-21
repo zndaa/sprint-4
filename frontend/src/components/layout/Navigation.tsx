@@ -15,17 +15,14 @@ export default function Navigation({ current, onNavigate }: NavigationProps) {
   return (
     <nav className="site-nav">
       {navItems.map((item) => (
-        <a
+        <button
           key={item.name}
-          href="#"
+          type="button"
           className={current === item.name ? "active" : ""}
-          onClick={(e) => {
-            e.preventDefault();
-            onNavigate(item.name);
-          }}
+          onClick={() => onNavigate(item.name)}
         >
           {item.label}
-        </a>
+        </button>
       ))}
     </nav>
   );
