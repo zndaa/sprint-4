@@ -10,7 +10,7 @@ export const events: CampusEvent[] = [
     time: "14:00",
     location: "Mühendislik Amfisi",
     description: "Sektörden tecrübeli yazılımcılarla soru-cevap ve kariyer tavsiyeleri.",
-    image: "/images.jpg"
+    imageUrl: "/images.jpg"
   },
   {
     id: "event-2",
@@ -21,7 +21,7 @@ export const events: CampusEvent[] = [
     time: "10:30",
     location: "Laboratuvar A2",
     description: "Uygulamalı modern web geliştirme ve tipli kodlama atölyesi.",
-    image: "/images.jpg"
+    imageUrl: "/images.jpg"
   },
   {
     id: "event-3",
@@ -32,7 +32,7 @@ export const events: CampusEvent[] = [
     time: "13:00",
     location: "Kültür Merkezi Salon A",
     description: "Büyük dil modelleri ve yapay zeka teknolojilerinin gelişimi.",
-    image: "/images.jpg"
+   imageUrl: "/images.jpg"
   },
   {
     id: "event-4",
@@ -43,7 +43,7 @@ export const events: CampusEvent[] = [
     time: "09:00",
     location: "Merkezi Derslikler B4",
     description: "Ödüllü problem çözme ve algoritma geliştirme yarışı.",
-    image: "/images.jpg"
+   imageUrl: "/images.jpg"
   },
   {
     id: "event-5",
@@ -54,7 +54,7 @@ export const events: CampusEvent[] = [
     time: "15:00",
     location: "Mühendislik Amfisi",
     description: "Web güvenliği, sızma testleri ve kişisel veri güvenliği.",
-    image: "/images.jpg"
+  imageUrl: "/images.jpg"
   },
   {
     id: "event-6",
@@ -65,6 +65,6 @@ export const events: CampusEvent[] = [
     time: "11:00",
     location: "Tasarım Stüdyosu",
     description: "Kullanıcı deneyimi odaklı arayüz tasarımı ilkeleri.",
-    image: "/images.jpg"
+  imageUrl:"/images.jpg"
   }
 ];

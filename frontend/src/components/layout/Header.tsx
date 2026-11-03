@@ -1,9 +1,9 @@
 interface HeaderProps {
-  title: string;
+  title?: string;
   text?: string;
 }
 
-export default function Header({ title, text }: HeaderProps) {
+export default function Header({ title = "Kampüs Etkinlikleri", text }: HeaderProps) {
   return (
     <header className="site-header">
       <h1>{title}</h1>

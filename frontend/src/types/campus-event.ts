@@ -9,5 +9,15 @@ export interface CampusEvent {
   time: string;
   location: string;
   description: string;
-  image?: string; 
+  imageUrl?: string;
+}
+export interface EventFormData {
+  title: string;
+  category: Category | "";
+  date: string;
+  time: string;
+  location: string;
+  capacity: string;
+  description: string;
+  imageUrl?: string;
 }

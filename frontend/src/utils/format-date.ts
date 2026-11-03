@@ -1,5 +1,9 @@
- export function formatDate(dateStr: string): string {
-  if (!dateStr) return "";
-  const options: Intl.DateTimeFormatOptions = { day: "numeric", month: "long", year: "numeric" };
-  return new Date(dateStr).toLocaleDateString("tr-TR", options);
+export function formatDate(dateString: string): string {
+  if (!dateString) return "";
+  const date = new Date(dateString);
+  return date.toLocaleDateString("tr-TR", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+  });
 }
