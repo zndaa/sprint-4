@@ -15,7 +15,6 @@ import EventForm from "./components/forms/EventForm";
 export function App() {
   const [page, setPage] = useState<PageName>("home");
   const [selectedId, setSelectedId] = useState<string | null>(null);
-
   const [searchText, setSearchText] = useState("");
   const [selectedCategory, setSelectedCategory] = useState<Category | "">("");
 
@@ -37,6 +36,44 @@ export function App() {
 
   const selected = selectedId ? findEventById(events, selectedId) : undefined;
 
+  // Slayttaki beklenen çıktılara birebir uygun dinamik Header başlık ve alt yazıları
+  const getHeaderProps = () => {
+    switch (page) {
+      case "home":
+        return {
+          title: "Kampüs Etkinlikleri",
+          text: "Aşağıdaki seminer, atölye ve söyleşileri tek yerden takip edin.",
+        };
+      case "events":
+        return {
+          title: "Tüm Etkinlikler",
+          text: "Ekim ayında kampüste düzenlenen etkinlikler.",
+        };
+      case "detail":
+        return {
+          title: selected ? selected.title : "Etkinlik Detayı",
+          text: "",
+        };
+      case "add":
+        return {
+          title: "Etkinlik Ekle",
+          text: "Bu sprintte form sadece görünümdür; kayıt yapılmaz.",
+        };
+      case "update":
+        return {
+          title: selected ? `${selected.title} Güncelle` : "Etkinlik Güncelle",
+          text: "Bu sprintte form sadece görünümdür; kayıt yapılmaz.",
+        };
+      default:
+        return {
+          title: "Kampüs Etkinlikleri",
+          text: "",
+        };
+    }
+  };
+
+  const headerProps = getHeaderProps();
+
   useEffect(() => {
     if (page === "home") {
       document.title = "Kampüs Etkinlikleri — Ana Sayfa";
@@ -55,7 +92,7 @@ export function App() {
 
   return (
     <>
-      <Header title="Kampüs Etkinlikleri" />
+      <Header title={headerProps.title} text={headerProps.text} />
       <Navigation current={page} onNavigate={go} />
 
       <main className="main-content">
@@ -73,57 +110,57 @@ export function App() {
             </div>
           </section>
         )}
-           {page === "events" && (
-  <section className="etkinlikler-sayfasi">
-    <h2>Tüm Etkinlikler</h2>
 
-    <EventFilter
-      searchText={searchText}
-      onSearchChange={setSearchText}
-      selectedCategory={selectedCategory}
-      onCategoryChange={setSelectedCategory}
-      categories={categories}
-    />
+        {page === "events" && (
+          <section className="etkinlikler-sayfasi">
+            <h2>Tüm Etkinlikler</h2>
 
-    <p style={{ fontSize: "14px", margin: "10px 0" }}>
-      {filtered.length} etkinlik listeleniyor.
-    </p>
+            <EventFilter
+              searchText={searchText}
+              onSearchChange={setSearchText}
+              selectedCategory={selectedCategory}
+              onCategoryChange={setSelectedCategory}
+              categories={categories}
+            />
+            <p style={{ fontSize: "14px", margin: "10px 0" }}>
+              {filtered.length} etkinlik listeleniyor.
+            </p>
 
-    <EventList
-      events={filtered}
-      onShowDetail={(id) => go("detail", id)}
-      emptyText="Aramanıza uygun etkinlik bulunamadı."
-    />
-  </section>
-)}
-        
-       {page === "detail" && (
-  <section className="detay-sayfasi">
-    {!selected ? (
-      <div className="hata-kutusu">
-        <p>Aradığınız etkinlik bulunamadı.</p>
-        <button onClick={() => go("events")}>Listeye Dön</button>
-      </div>
-    ) : (
-      <EventDetail
-        event={selected}
-        onBack={() => go("events")}
-        onEdit={(id) => go("update", id)}
-      />
-    )}
-  </section>
-)}
+            <EventList
+              events={filtered}
+              onShowDetail={(id) => go("detail", id)}
+              emptyText="Aramanıza uygun etkinlik bulunamadı."
+            />
+          </section>
+        )}
+
+        {page === "detail" && (
+          <section className="detay-sayfasi">
+            {!selected ? (
+              <div className="hata-kutusu">
+                <p>Aradığınız etkinlik bulunamadı.</p>
+                <button onClick={() => go("events")}>Listeye Dön</button>
+              </div>
+            ) : (
+              <EventDetail
+                event={selected}
+                onBack={() => go("events")}
+                onEdit={(id) => go("update", id)}
+              />
+            )}
+          </section>
+        )}
 
         {(page === "add" || page === "update") && (
-  <section className="form-sayfasi">
-    <h2>{page === "add" ? "Yeni Etkinlik Ekle" : "Etkinlik Güncelle"}</h2>
-    <EventForm
-      page={page}
-      selected={selected}
-      onSubmit={() => window.scrollTo(0, 0)}
-    />
-  </section>
-)}
+          <section className="form-sayfasi">
+            <h2>{page === "add" ? "Yeni Etkinlik Ekle" : "Etkinlik Güncelle"}</h2>
+            <EventForm
+              page={page}
+              selected={selected}
+              onSubmit={() => window.scrollTo(0, 0)}
+            />
+          </section>
+        )}
       </main>
       <Footer />
     </>
